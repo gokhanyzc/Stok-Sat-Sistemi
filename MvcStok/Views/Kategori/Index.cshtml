@@ -1,0 +1,42 @@
+﻿@using MvcStok.Models.Entity
+@using PagedList
+@using PagedList.Mvc;
+@model PagedList.IPagedList<TBL_KATEGORILER>   /*liste olarak çekmek istedigimiz tabloyu tutuyor. */ /* paging olarak.*/
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<!-- Burada listeleme yapılacak-->
+
+<table class="table table-bordered">
+    <!-- table a özel class tanımladık.kendisinin classı.-->
+    <tr>
+        <th>KATEGORİ ID </th>
+        <th>KATEGORİ ADI</th>
+        <th>KATEGORİ SİL</th>
+        <th>KATEGORİ GÜNCELLE</th>
+        <th>ALERT</th>
+    </tr>
+
+    <tbody>
+        <!--<tbody> etiketi HTML tablosunun gövde içeriğini gruplandımak için kullanılır.  -->
+
+        @foreach (var ktgr in Model)
+        {
+            <tr>
+                <th>@ktgr.KATEGORIID</th>  <!-- th kalın oluyor.-->
+                <td>@ktgr.KATEGORIAD</td>
+                <td><a href="/Kategori/KategoriSil/@ktgr.KATEGORIID" class="btn btn-danger">SİL</a></td>
+                <td><a href="/Kategori/KategoriGetir/@ktgr.KATEGORIID" class="btn btn-success">GÜNCELLE</a></td>
+                <<td>@Html.ActionLink("SİL", "KategoriSil", new { id = ktgr.KATEGORIID }, new { @class = "btn btn-warning", onclick = "return confirm('Gerçekten Silmek İstiyor musunuz?')" })</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+<a href="/Kategori/YeniKategori/" class="btn btn-primary">YENİ KATEGORİ EKLE</a>
+

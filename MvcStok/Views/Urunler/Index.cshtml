@@ -1,0 +1,60 @@
+﻿@using MvcStok.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<TBL_URUNLER>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!-- ÜRÜNLER LİSTELEME-->
+
+<table id="tbl1" class="table table-bordered">
+    <thead>
+        <!-- thead tablonun konu başlığının etiketi-->
+        <tr>
+            <th>ÜRÜN ID</th>
+            <th>ÜRÜN ADI</th>
+            <th>ÜRÜN MARKASI</th>
+            <th>ÜRÜN KATEGORİ</th>
+            <th>ÜRÜN FİYATI</th>
+            <th>STOK</th>
+            <th>ÜRÜN SİL</th>
+            <th>ÜRÜN GÜNCELLE</th>
+            <th>ALERT</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var urnlr in Model)
+        {
+        <tr>
+            <th>@urnlr.URUNID</th>
+            <td>@urnlr.URUNAD</td>
+            <td>@urnlr.MARKA</td>
+            <td>@urnlr.TBL_KATEGORILER.KATEGORIAD</td>   <!--İNNER JOİN KARŞILIĞI-->
+            <td>@urnlr.FIYAT</td>
+            <td>@urnlr.STOK</td>
+            <td><a href="/Urunler/UrunSil/@urnlr.URUNID" class="btn btn-danger">SİL</a></td>
+            <td><a href="/Urunler/UrunGetir/@urnlr.URUNID" class="btn btn-success">GÜNCELLE</a></td>
+<!--Alert--> <td>@Html.ActionLink("SİL", "UrunSil", new { id = urnlr.URUNID }, new { @class = "btn btn-warning", onclick = "return confirm('Gerçekten Silmek İstiyor musunuz?')" })</td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+<!--paging işlemi-->
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+
+<a href="/Urunler/YeniUrun/" class="btn btn-primary">YENİ ÜRÜN EKLE</a> 
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs/jszip-2.5.0/dt-1.10.18/b-1.5.6/b-html5-1.5.6/fh-3.1.4/datatables.min.js"></script>
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
+<script>
+    $('#tbl1').DataTable();
+
+    
+</script>

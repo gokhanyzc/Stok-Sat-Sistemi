@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <title>MVC STOK</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color:#ccf6f1;">
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/Urunler/Index/">Mvc Stok</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/Kategori/Index/">Kategoriler</a></li>
+                <li><a href="/Urunler/Index/">Ürünler</a></li>
+                <li><a href="/Musteriler/Index/">Müşteriler</a></li>
+                <li><a href="/Satis/Index/">Satışlar</a></li>
+                <li><a href="/Default/Index/">Yardım</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div class="container">
+        @RenderBody() <!-- bunu tanımlamazsak hata verir.Layouta bağlı sayfaların içeriğini oluşturur.-->
+    </div>
+
+</body>
+</html>
